@@ -1,0 +1,50 @@
+package com.hms.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import com.hms.entities.*;
+import com.hms.services.*;
+
+@Controller
+public class AppointmentController 
+{
+
+    @Autowired
+    private AppointmentService appointmentService;
+
+    // Show form to schedule a new appointment
+    @GetMapping("/schedule")
+    public String showScheduleForm(Model model) 
+    {
+        model.addAttribute("appointment", new Appointment());
+        return "scheduleAppointment"; // HTML page: scheduleAppointment.html
+    }
+
+    // Handle form submission to schedule an appointment
+    @PostMapping("/schedule")
+    public String scheduleAppointment(@ModelAttribute Appointment appointment) 
+    {
+        appointmentService.scheduleAppointment(appointment);
+        return "redirect:/appointments/details/" + appointment.getAppointmentId();
+    }
+
+    // Display appointment details
+    @GetMapping("/details/{id}")
+    public String getAppointmentDetails(@PathVariable Long id, Model model) 
+    {
+        Appointment appointment = appointmentService.getAppointmentById(id);
+        model.addAttribute("appointment", appointment);
+        return "appointmentDetails"; // HTML page: appointmentDetails.html
+    }
+
+    // Cancel an appointment
+    @GetMapping("/cancel/{id}")
+    public String cancelAppointment(@PathVariable Long id) 
+    {
+        appointmentService.cancelAppointment(id);
+        return "redirect:/appointments/details/" + id;
+    }
+}
+

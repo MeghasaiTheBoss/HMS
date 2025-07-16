@@ -1,0 +1,607 @@
+.doctor-container {
+  max-width: 1400px;
+  margin: 30px auto;
+}
+
+.box {
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+  background-color: #f4f4f4;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.tab-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  position: relative;
+  background-color:#a9a9a9;
+}
+
+
+.tab-list::before {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 25%;
+  position: absolute;
+  bottom: 0;
+  background-color: #aaa;
+  transition: .3s;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  transition: .3s;
+  color:black;
+  background-color: #f4f4f4;
+}
+
+.tab-toggle {
+  display: none;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-trigger {
+  display: block;
+  padding: 10px 0;
+  background-color:#f4f4f4;
+}
+
+.tab-container {
+  padding: 15px 30px;
+}
+
+tr:nth-child(even) 
+{
+	background: #b0c4de;
+}
+tr:nth-child(odd) 
+{
+	background: #f5fffa;
+}
+
+.table thead th 
+{
+    background-color: #f2f2f2;
+    border-top: 2px solid black; 
+    border-bottom: 2px solid black; 
+    margin-bottom:5px;
+}
+  	
+.tab-toggle:nth-child(1):checked ~ .tab-list .tab-item:nth-child(1) .tab-trigger,
+.tab-toggle:nth-child(2):checked ~ .tab-list .tab-item:nth-child(2) .tab-trigger, 
+.tab-toggle:nth-child(3):checked ~ .tab-list .tab-item:nth-child(3) .tab-trigger,
+.tab-toggle:nth-child(4):checked ~ .tab-list .tab-item:nth-child(4) .tab-trigger
+{
+  background-color:rgb(0 71 122);
+}
+
+.tab-toggle:nth-child(1):checked ~ .tab-list::before {
+  left: 0%;
+}
+
+.tab-toggle:nth-child(2):checked ~ .tab-list::before {
+  left: 25%;
+}
+
+.tab-toggle:nth-child(3):checked ~ .tab-list::before {
+  left: 50%;
+}
+
+.tab-toggle:nth-child(4):checked ~ .tab-list::before {
+  left: 75%;
+}
+.tab-toggle:nth-child(1):checked ~ .tab-container .tab-content:nth-child(1),
+.tab-toggle:nth-child(2):checked ~ .tab-container .tab-content:nth-child(2),
+.tab-toggle:nth-child(3):checked ~ .tab-container .tab-content:nth-child(3),
+.tab-toggle:nth-child(4):checked ~ .tab-container .tab-content:nth-child(4) {
+  display: block;
+}
+
+.doctor-container h4 {
+  text-align:center; 
+  text-transform:capitalize;
+  font-size:26px; letter-spacing:1px;
+  font-family:"Playfair Display", serif;
+  font-weight:bold;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 16px 0;
+  grid-gap: 22px;
+}
+
+.doctor-container h4:after,h4:before {
+  content: " ";
+  display: block;
+  border-bottom: 2px solid #aaa;
+  background-color:#f8f8f8;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 70px; /* Increase the font size to make the cross symbol larger */
+    cursor: pointer;
+    color: red; /* Set the color of the cross symbol to red */
+}
+
+.view-prescription-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+.view-prescription-button:hover {
+    background-color: #45a049;
+}
+         
+.update-btn 
+{
+	background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD  51%, #4CB8C4  100%);
+	            margin-right: 10px;
+            padding: 10px 20px;
+            text-align: center;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            cursor:pointer;
+}
+.update-btn:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }         
+
+.reports-btn
+{
+	background-image: linear-gradient(to right, #085078 0%, #85D8CE  51%, #085078  100%);
+	margin-right: 10px;
+            padding: 10px 20px;
+            text-align: center;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            cursor:pointer;
+}
+.reports-btn:hover 
+{
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+}
+.report-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.close-button {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 7px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.close-button:hover {
+    background: #cc0000;
+}
+
+
+
+
+
+
+.prescription-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: left;
+  align-items: center;
+  margin-left: 0%;  
+  z-index: 1;
+}
+
+.prescription-content {
+   background-image: linear-gradient(to right, #8e9eab 0%, #eef2f3  51%, #8e9eab  100%);
+  font-family: "Playfair Display", serif;
+  color: black;
+  margin: 100px 100px; /* Adjust the margin as needed */  
+  margin-top: 5%;
+  margin-left: 10%;
+  margin-right: 5%;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-height: 90vh; /* Set the maximum height relative to the viewport height */
+  overflow: auto;
+}
+
+.prescription-content .modal-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.prescription-content .modal-info p {
+  font-size: 20px;
+}
+
+.text-area-heading {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style the prescription textarea and note to nurse textarea */
+#prescription-textarea,
+#note-to-nurse-textarea {
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.prescription-list {
+    list-style-type: none;
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  .prescription-list li {
+    white-space: pre-line;
+    text-transform: capitalize;
+  }
+  .prescription-content h6{
+	  font-weight: bold;
+  }
+  
+  .prescription-content p {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.textarea-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-textarea,
+.right-textarea {
+    width: 48%; /* Adjust the width as per your preference */
+}
+
+.left-textarea textarea,
+.right-textarea textarea {
+    width: 100%;
+    background-color:#dbf9db;
+}
+.buttons
+{
+	display: flex;
+	margin-bottom: 10px;	
+	justify-content: center;
+	align-items: center;
+}
+.report-content
+{
+  background-color:#ffe5b4;
+  font-family: "Playfair Display", serif;
+  color: black;
+  margin: 100px 100px;  
+  margin-top: 5%;
+  margin-left: 30%;
+  margin-right: 5%;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 90%;
+  max-height: 90vh; /* Set the maximum height relative to the viewport height */
+  overflow: auto;
+  position: relative;
+  max-width: 600px;
+}
+.buttons
+{
+	display: flex;
+}
+.treated
+{
+	background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+.discharge
+{
+	background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+.test-content {
+  background-color: #307d7e;
+  font-family: "Playfair Display", serif;
+  margin: auto; 
+  margin-top: 10%;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 60%; 
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+
+.report-modal,
+.test-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    z-index: 2;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.report-modal.show-modal,
+.test-modal.show-modal {
+    display: block;
+}
+
+.report-modal .prescription-content,
+.test-modal .prescription-content {
+    text-align: left;
+}
+
+.report-modal .close-modal,
+.test-modal .close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.report-modal .close-modal:hover,
+.test-modal .close-modal:hover,
+.report-modal .close-modal:focus,
+.test-modal .close-modal:focus {
+    color: red;
+    text-decoration: none;
+}
+.test-list
+{
+	list-style-type: none;
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.report-content ul,
+.test-content ul {
+    list-style-type: none;
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.report-content ul li,
+.test-content ul li {
+    white-space: pre-line;
+    text-transform: capitalize;
+    padding: 10px;
+    color:black;
+    font-size:20px;
+}
+
+.test-content .close {
+  background-color: light-red;
+  font-family: "Playfair Display", serif;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.test-content .close:hover {
+  background-color:red;
+}
+
+
+
+
+
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+    .doctor-container h4 {
+        font-size: 18px;
+    }
+
+    .tab-list {
+        font-size: 14px;
+    }
+
+    .tab-item {
+        padding: 10px;
+    }
+
+    .tab-trigger {
+        padding: 5px 10px;
+    }
+
+    .doctor-container {
+        margin: 15px;
+    }
+
+    .textarea-container {
+        flex-direction: column;
+    }
+
+    .left-textarea,
+    .right-textarea {
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .view-prescription-button {
+        width: 100%;
+    }
+    
+    .report-content,
+    .test-content {
+        margin: 50px auto; /* Adjust margin as needed for smaller screens */
+        width: 90%; /* Adjust width as needed for smaller screens */
+        max-width: 400px; /* Set maximum width for smaller screens */
+        padding: 15px;
+    }
+
+    .report-content .close,
+    .test-content .close {
+        margin-top: 20px;
+    }
+}
+
+/* Media query for phones and smaller screens */
+@media (max-width: 480px) {
+    .doctor-container h4 {
+        font-size: 16px;
+    }
+
+    .tab-list {
+        font-size: 12px;
+    }
+
+    .tab-item {
+        padding: 8px;
+    }
+
+    .tab-trigger {
+        padding: 5px;
+    }
+
+    .doctor-container {
+        margin: 10px;
+    }
+
+    .textarea-container {
+        flex-direction: column;
+    }
+
+    .left-textarea,
+    .right-textarea {
+        width: 100%;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .view-prescription-button {
+        width: 100%;
+    }
+    
+    .report-content,
+    .test-content {
+        margin: 30px auto; /* Adjust margin as needed for smaller screens */
+        width: 90%; /* Adjust width as needed for smaller screens */
+        max-width: 300px; /* Set maximum width for smaller screens */
+        padding: 10px;
+    }
+
+    .report-content .close,
+    .test-content .close {
+        margin-top: 15px;
+    }
+}

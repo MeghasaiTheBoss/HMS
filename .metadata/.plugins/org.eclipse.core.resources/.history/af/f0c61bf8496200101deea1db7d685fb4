@@ -1,0 +1,68 @@
+package com.hms.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import com.hms.services.*;
+import com.hms.entities.*;
+
+@Controller
+@RequestMapping("/patients")
+public class PatientController {
+
+    @Autowired
+    private PatientService patientService;
+
+    // Show form to add a new patient
+    @GetMapping("/add")
+    public String showAddPatientForm(Model model) {
+        model.addAttribute("patient", new Patient());
+        return "addPatient"; // HTML page: addPatient.html
+    }
+
+    // Handle form submission to add a new patient
+    @PostMapping("/add")
+    public String addPatient(@ModelAttribute Patient patient) {
+        patientService.addPatient(patient);
+        return "redirect:/patients/list";
+    }
+
+    // Show form to update an existing patient
+    @GetMapping("/update/{id}")
+    public String showUpdatePatientForm(@PathVariable Long id, Model model) {
+        Patient patient = patientService.getPatientById(id);
+        model.addAttribute("patient", patient);
+        return "updatePatient"; // HTML page: updatePatient.html
+    }
+
+    // Handle form submission to update patient
+    @PostMapping("/update/{id}")
+    public String updatePatient(@PathVariable Long id, @ModelAttribute Patient patient) {
+        patientService.updatePatient(id, patient);
+        return "redirect:/patients/details/" + id;
+    }
+
+    // Display patient details
+    @GetMapping("/details/{id}")
+    public String getPatientDetails(@PathVariable Long id, Model model) {
+        Patient patient = patientService.getPatientById(id);
+        model.addAttribute("patient", patient);
+        return "patientDetails"; // HTML page: patientDetails.html
+    }
+
+    // Delete a patient
+    @GetMapping("/delete/{id}")
+    public String deletePatient(@PathVariable Long id) {
+        patientService.deletePatient(id);
+        return "redirect:/patients/list";
+    }
+
+    // List all patients
+    @GetMapping("/list")
+    public String listPatients(Model model) {
+        model.addAttribute("patients", patientService.getAllPatients());
+        return "patientList"; // HTML page: patientList.html
+    }
+}
+

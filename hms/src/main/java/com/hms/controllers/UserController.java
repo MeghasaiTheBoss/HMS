@@ -1,0 +1,63 @@
+package com.hms.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import com.hms.services.*;
+import com.hms.entities.*;
+
+@Controller
+@RequestMapping("/users")
+public class UserController 
+{
+
+    @Autowired
+    private UserService userService;
+
+    // Show registration form
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) 
+    {
+        model.addAttribute("user", new User());
+        return "registerUser"; // HTML page: registerUser.html
+    }
+
+    // Handle registration
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute User user) 
+    {
+        userService.registerUser(user);
+        return "redirect:/users/profile/" + user.getUserId();
+    }
+
+    // Show login form
+    @GetMapping("/login")
+    public String showLoginForm() 
+    {
+        return "loginUser"; // HTML page: loginUser.html
+    }
+
+    // Handle login
+    @PostMapping("/login")
+    public String loginUser(@RequestParam String username, @RequestParam String password, Model model) 
+    {
+        User user = userService.loginUser(username, password);
+        if (user != null) {
+            return "redirect:/users/profile/" + user.getUserId();
+        } else {
+            model.addAttribute("error", "Invalid credentials");
+            return "loginUser";
+        }
+    }
+
+    // Display user profile
+    @GetMapping("/profile/{id}")
+    public String getUserProfile(@PathVariable Long id, Model model) 
+    {
+        User user = userService.getUserProfile(id);
+        model.addAttribute("user", user);
+        return "userProfile"; // HTML page: userProfile.html
+    }
+}
+

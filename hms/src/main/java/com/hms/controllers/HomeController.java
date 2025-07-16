@@ -1,0 +1,38 @@
+package com.hms.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.hms.services.DoctorService;
+
+import org.springframework.ui.Model;
+
+
+@Controller
+public class HomeController 
+{
+
+    private final PatientController patientController;
+	private DoctorService doctorService;
+	
+	
+	public HomeController(DoctorService doctorService, PatientController patientController) {
+		super();
+		this.doctorService = doctorService;
+		this.patientController = patientController;
+	}
+
+
+	@GetMapping("/")
+	public String homePage(Model model)
+	{
+		model.addAttribute("doctors",doctorService.getAllDoctors());
+		return "Home";
+	}
+	@GetMapping("/contact")
+	public String contact(Model model)
+	{
+		return "Contact";
+	}
+}
+
