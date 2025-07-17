@@ -21,7 +21,7 @@ public class Patient
 	
 	private String gender;
 	
-	private long contactNumber;
+	private String contactNumber;
 	
 	private String address;
 	
@@ -32,7 +32,7 @@ public class Patient
 		// TODO Auto-generated constructor stub
 	}
 
-	public Patient(String name, LocalDateTime dateOfBirth, String gender, long contactNumber, String address,
+	public Patient(String name, LocalDateTime dateOfBirth, String gender, String contactNumber, String address,
 			String medicalHistory) 
 	{
 		super();
@@ -76,7 +76,7 @@ public class Patient
 		this.gender = gender;
 	}
 
-	public long getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 

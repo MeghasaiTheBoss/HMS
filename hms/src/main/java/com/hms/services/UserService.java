@@ -1,7 +1,10 @@
 package com.hms.services;
 
+import org.springframework.stereotype.Service;
+
 import com.hms.entities.User;
 
+@Service
 public class UserService {
 
 	public void registerUser(User user) 

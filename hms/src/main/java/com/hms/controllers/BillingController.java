@@ -30,7 +30,7 @@ public class BillingController
     }
 
     // Display bill details
-    @GetMapping("/details/{id}")
+    @GetMapping("/billDetails/{id}")
     public String getBillDetails(@PathVariable Long id, Model model) 
     {
         Bill bill = billingService.getBillById(id);
